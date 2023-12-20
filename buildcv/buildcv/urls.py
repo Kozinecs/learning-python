@@ -27,12 +27,16 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = i18n_patterns(
-    path('', include(router.urls)),
     path("polls/", include("polls.urls")),
     path('admin/', admin.site.urls),
 )
 
 urlpatterns += [
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('', include('snippets.urls')),
+]
+
+urlpatterns += [
     path('i18n/', include('django.conf.urls.i18n')),
-    router.urls,
 ]
